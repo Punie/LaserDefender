@@ -5,6 +5,9 @@ public class PlayerController : MonoBehaviour
 {
 	public float m_Speed = 10f;
 	public float m_Padding = 1f;
+	public GameObject m_Projectile;
+	public float m_ProjectileSpeed = 15f;
+	public float m_FiringRate = 0.2f;
 
 	float m_xMin;
 	float m_xMax;
@@ -12,15 +15,16 @@ public class PlayerController : MonoBehaviour
 
 	void Start ()
 	{
-		DetectCameraBounderies ();
+		DetectCameraBoundaries ();
 	}
 
 	void Update ()
 	{
+		Shoot ();
 		Move ();
 	}
 
-	void DetectCameraBounderies ()
+	void DetectCameraBoundaries ()
 	{
 		float distance = transform.position.z - Camera.main.transform.position.z;
 
@@ -41,5 +45,21 @@ public class PlayerController : MonoBehaviour
 		float x = Mathf.Clamp (transform.position.x, m_xMin, m_xMax);
 
 		transform.position = new Vector3 (x, transform.position.y, transform.position.z);
+	}
+
+	void Shoot ()
+	{
+		if (Input.GetKeyDown (KeyCode.Space))
+			InvokeRepeating ("Fire", 0.0001f, m_FiringRate);
+		if (Input.GetKeyUp (KeyCode.Space))
+			CancelInvoke ("Fire");
+	}
+
+	void Fire ()
+	{
+		GameObject projectile = Instantiate (m_Projectile, transform.position, Quaternion.identity) as GameObject;
+		Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D> ();
+
+		projectileRigidbody.velocity = new Vector3 (0f, m_ProjectileSpeed);
 	}
 }

@@ -17,8 +17,7 @@ public class EnemySpawner : MonoBehaviour
 	void Start ()
 	{
 		SpawnEnemies ();
-
-		DetectCameraBounderies ();
+		DetectCameraBoundaries ();
 	}
 
 	void Update ()
@@ -40,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
 		}
 	}
 
-	void DetectCameraBounderies ()
+	void DetectCameraBoundaries ()
 	{
 		float distance = transform.position.z - Camera.main.transform.position.z;
 
@@ -62,9 +61,9 @@ public class EnemySpawner : MonoBehaviour
 
 		transform.position = new Vector3 (x, transform.position.y, transform.position.z);
 
-		if (x == m_xMin)
+		if (x <= m_xMin)
 			m_GoingLeft = false;
-		else if (x == m_xMax)
+		else if (x >= m_xMax)
 			m_GoingLeft = true;
 	}
 }
