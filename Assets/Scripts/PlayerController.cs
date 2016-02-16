@@ -12,6 +12,16 @@ public class PlayerController : MonoBehaviour
 
 	void Start ()
 	{
+		DetectCameraBounderies ();
+	}
+
+	void Update ()
+	{
+		Move ();
+	}
+
+	void DetectCameraBounderies ()
+	{
 		float distance = transform.position.z - Camera.main.transform.position.z;
 
 		Vector3 leftmost = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, distance));
@@ -21,7 +31,7 @@ public class PlayerController : MonoBehaviour
 		m_xMax = rightmost.x - m_Padding;
 	}
 
-	void Update ()
+	void Move ()
 	{
 		if (Input.GetKey (KeyCode.LeftArrow))
 			transform.position += Vector3.left * m_Speed * Time.deltaTime;
