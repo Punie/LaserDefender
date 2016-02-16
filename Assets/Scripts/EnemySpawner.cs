@@ -7,7 +7,10 @@ public class EnemySpawner : MonoBehaviour
 
 	void Start ()
 	{
-		GameObject enemy = Instantiate (enemyPrefab, new Vector3 (0f, 0f, 0f), Quaternion.identity) as GameObject;
-		enemy.transform.parent = transform;
+		foreach (Transform child in transform)
+		{
+			GameObject enemy = Instantiate (enemyPrefab, child.transform.position, Quaternion.identity) as GameObject;
+			enemy.transform.parent = child;
+		}
 	}
 }
