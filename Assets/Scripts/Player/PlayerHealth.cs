@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
 		
 	}
 
-	private void OnEnable ()
+	private void Start ()
 	{
 		m_CurrentHealth = m_MaxHealth;
 		m_IsDead = false;
