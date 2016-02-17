@@ -9,13 +9,18 @@ public class PlayerController : MonoBehaviour
 	public float m_ProjectileSpeed = 15f;
 	public float m_FiringRate = 0.2f;
 
+	public float m_MaxHealth = 10f;
+
 	float m_xMin;
 	float m_xMax;
+
+	float m_CurrentHealth;
 
 
 	void Start ()
 	{
 		DetectCameraBoundaries ();
+		m_CurrentHealth = m_MaxHealth;
 	}
 
 	void Update ()
@@ -61,5 +66,23 @@ public class PlayerController : MonoBehaviour
 		Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D> ();
 
 		projectileRigidbody.velocity = new Vector3 (0f, m_ProjectileSpeed);
+	}
+
+	void OnTriggerEnter2D (Collider2D col)
+	{
+		Projectile projectile = col.gameObject.GetComponent<Projectile> ();
+
+		if (projectile)
+		{
+			GetHit (projectile);
+		}
+	}
+
+	void GetHit (Projectile projectile)
+	{
+		m_CurrentHealth -= projectile.GetDamage ();
+		if (m_CurrentHealth <= 0f)
+			Destroy (gameObject);
+		projectile.Hit ();
 	}
 }
