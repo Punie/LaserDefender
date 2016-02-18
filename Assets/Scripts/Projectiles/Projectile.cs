@@ -22,15 +22,4 @@ public class Projectile : MonoBehaviour
 			Destroy (gameObject);
 		}
 	}
-//	public float m_Damage = 1f;
-//
-//	public float GetDamage ()
-//	{
-//		return m_Damage;
-//	}
-//
-//	public void Hit ()
-//	{
-//		Destroy (gameObject);
-//	}
 }
