@@ -7,6 +7,7 @@ public class EnemyShooting : MonoBehaviour
 	public Transform m_FireTransform;
 	public float m_ProjectileSpeed = 10f;
 	public float m_ShotsPerSecond = 0.5f;
+	public AudioSource m_ShootingAudio;
 
 
 	private void Update ()
@@ -21,5 +22,7 @@ public class EnemyShooting : MonoBehaviour
 	{
 		Rigidbody2D projectileInstance = Instantiate (m_Projectile, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody2D;
 		projectileInstance.velocity = m_FireTransform.up * m_ProjectileSpeed;
+
+		m_ShootingAudio.Play ();
 	}
 }
