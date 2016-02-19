@@ -52,6 +52,10 @@ public class PlayerHealth : MonoBehaviour
 	{
 		m_IsDead = true;
 		AudioSource.PlayClipAtPoint (m_DeathAudioClip, transform.position);
+
 		Destroy (gameObject);
+
+		LevelManager levelManager = GameObject.Find ("LevelManager").GetComponent<LevelManager> ();
+		levelManager.LoadLevel ("Game Over Screen");
 	}
 }

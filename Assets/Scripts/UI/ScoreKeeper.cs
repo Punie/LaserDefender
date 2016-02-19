@@ -4,7 +4,7 @@ using System.Collections;
 
 public class ScoreKeeper : MonoBehaviour
 {
-	public int m_Score = 0;
+	public static int m_Score = 0;
 
 	private Text m_ScoreText;
 
@@ -20,9 +20,8 @@ public class ScoreKeeper : MonoBehaviour
 		m_ScoreText.text = "Score: " + m_Score;
 	}
 
-	public void Reset ()
+	public static void Reset ()
 	{
 		m_Score = 0;
-		m_ScoreText.text = "Score: " + m_Score;
 	}
 }
